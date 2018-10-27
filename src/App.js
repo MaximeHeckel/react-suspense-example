@@ -1,28 +1,41 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense, Fragment, memo } from "react";
+import { createCache, createResource } from "simple-cache-provider";
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
-}
+const cache = createCache();
 
-export default App;
+const createFetcher = callback => {
+  const resource = createResource(callback);
+  return {
+    read: () => resource.read(cache)
+  };
+};
+
+const Fetcher = createFetcher(() =>
+  fetch("https://jsonplaceholder.typicode.com/todos").then(r => r.json())
+);
+
+const List = () => {
+  const data = Fetcher.read();
+  return (
+    <ul>
+      {data.map(item => (
+        <li style={{ listStyle: "none" }} key={item.id}>
+          {item.title}
+        </li>
+      ))}
+    </ul>
+  );
+};
+
+const App = () => (
+  <Fragment>
+    <h2 style={{ textAlign: "center" }}>{`React: ${React.version} Demo`}</h2>
+    <Suspense fallback={<div>Loading...</div>}>
+      <List />
+    </Suspense>
+  </Fragment>
+);
+
+const MemoApp = memo(App);
+
+export default MemoApp;

@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react": "^16.6.0",
-    "react-dom": "^16.6.0",
-    "react-scripts": "2.0.5"
+    "react": "16.6.0",
+    "react-cache": "^1.1.2",
+    "react-dom": "16.6.0",
+    "react-scripts": "2.0.5",
+    "simple-cache-provider": "^0.10.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -16,10 +18,5 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"]
 }
