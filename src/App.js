@@ -1,16 +1,7 @@
 import React, { Suspense, Fragment, memo } from "react";
-import { createCache, createResource } from "simple-cache-provider";
+import { unstable_createResource } from "react-cache";
 
-const cache = createCache();
-
-const createFetcher = callback => {
-  const resource = createResource(callback);
-  return {
-    read: () => resource.read(cache)
-  };
-};
-
-const Fetcher = createFetcher(() =>
+const Fetcher = unstable_createResource(() =>
   fetch("https://jsonplaceholder.typicode.com/todos").then(r => r.json())
 );
 

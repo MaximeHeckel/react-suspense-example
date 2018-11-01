@@ -4,10 +4,9 @@
   "private": true,
   "dependencies": {
     "react": "16.6.0",
-    "react-cache": "^1.1.2",
+    "react-cache": "^2.0.0-alpha.1",
     "react-dom": "16.6.0",
-    "react-scripts": "2.0.5",
-    "simple-cache-provider": "^0.10.0"
+    "react-scripts": "2.0.5"
   },
   "scripts": {
     "start": "react-scripts start",
